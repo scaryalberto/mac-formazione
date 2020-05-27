@@ -1,0 +1,540 @@
+
+<!-- saved from url=(0050)https://docs.python.it/html/lib/module-urllib.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="STYLESHEET" href="./tramite_URL_files/lib.css" type="text/css">
+<link rel="SHORTCUT ICON" href="https://docs.python.it/html/icons/pyfav.gif">
+<link rel="start" href="https://docs.python.it/html/index.html" title="Indice della documentazione Python">
+<link rel="first" href="https://docs.python.it/html/lib/lib.html" title="La libreria di riferimento di Python">
+<link rel="contents" href="https://docs.python.it/html/lib/contents.html" title="Contents">
+<link rel="index" href="https://docs.python.it/html/lib/genindex.html" title="Index">
+<link rel="last" href="https://docs.python.it/html/lib/about.html" title="Circa questo documento...">
+<link rel="help" href="https://docs.python.it/html/lib/about.html" title="Circa questo documento...">
+<link rel="next" href="https://docs.python.it/html/lib/module-urllib2.html">
+<link rel="prev" href="https://docs.python.it/html/lib/module-cgitb.html">
+<link rel="parent" href="https://docs.python.it/html/lib/internet.html">
+<link rel="next" href="https://docs.python.it/html/lib/urlopener-objs.html">
+<meta name="aesop" content="information">
+<meta name="description" content="urllib -- Apertura di risorse arbitrarie tramite URL">
+<meta name="keywords" content="lib">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<title>11.4 urllib -- Apertura di risorse arbitrarie tramite URL</title>
+</head>
+<body>
+<div class="navigation">
+<div id="top-navigation-panel">
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tbody><tr>
+<td class="online-navigation"><a rel="prev" title="11.3 cgitb  " href="https://docs.python.it/html/lib/module-cgitb.html"><img src="./tramite_URL_files/previous.png" border="0" height="32" alt="Previous Page" width="32"></a></td>
+<td class="online-navigation"><a rel="parent" title="11. Protocolli internet e" href="https://docs.python.it/html/lib/internet.html"><img src="./tramite_URL_files/up.png" border="0" height="32" alt="Up One Level" width="32"></a></td>
+<td class="online-navigation"><a rel="next" title="11.4.1 Oggetti URLopener" href="https://docs.python.it/html/lib/urlopener-objs.html"><img src="./tramite_URL_files/next.png" border="0" height="32" alt="Next Page" width="32"></a></td>
+<td align="center" width="100%">La libreria di riferimento di Python</td>
+<td class="online-navigation"><a rel="contents" title="Table of Contents" href="https://docs.python.it/html/lib/contents.html"><img src="./tramite_URL_files/contents.png" border="0" height="32" alt="Contents" width="32"></a></td>
+<td class="online-navigation"><a href="https://docs.python.it/html/lib/modindex.html" title="Module Index"><img src="./tramite_URL_files/modules.png" border="0" height="32" alt="Module Index" width="32"></a></td>
+<td class="online-navigation"><a rel="index" title="Index" href="https://docs.python.it/html/lib/genindex.html"><img src="./tramite_URL_files/index.png" border="0" height="32" alt="Index" width="32"></a></td>
+</tr></tbody></table>
+<div class="online-navigation">
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="https://docs.python.it/html/lib/module-cgitb.html">11.3 cgitb  </a>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="https://docs.python.it/html/lib/internet.html">11. Protocolli internet e</a>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="https://docs.python.it/html/lib/urlopener-objs.html">11.4.1 Oggetti URLopener</a>
+</div>
+<hr></div>
+</div>
+<!--End of Navigation Panel-->
+
+<h1><a name="SECTION0013400000000000000000">
+11.4 <tt class="module">urllib</tt> --
+         Apertura di risorse arbitrarie tramite URL</a>
+</h1>
+
+<p>
+<a name="module-urllib"><!--z--></a>
+
+</p><p>
+<a id="l2h-3048"><!--x--></a>
+
+</p><p>
+Questo modulo fornisce un'interfaccia di alto livello per estrarre
+dati attraverso il World Wide Web.  In particolare, la funzione
+<tt class="function">urlopen()</tt> è simile alla funzione built-in
+<tt class="function">open()</tt>, ma accetta Universal Resurce Locators (URL) invece
+dei nomi di file.  Vengono applicate alcune restrizioni: può aprire
+solo URL in lettura, e non sono disponibili funzioni di seek. 
+
+</p><p>
+Definisce le seguenti funzioni pubbliche:
+
+</p><p>
+</p><dl><dt><table cellpadding="0" cellspacing="0"><tbody><tr valign="baseline">
+  <td><nobr><b><tt id="l2h-3030" class="function">urlopen</tt></b>(</nobr></td>
+  <td><var>url</var><big>[</big><var>, data</var><big>[</big><var>, proxies</var><big>]</big><big>]</big>)</td></tr></tbody></table></dt>
+<dd>
+Apre un oggetto di rete denotato da una URL in lettura.  Se l'URL non
+possiede uno schema identificativo, o se ha un <span class="file">file:</span> come per
+lo schema identificativo, apre un file locale (senza i fine riga
+universali); altrimenti apre un socket verso un server da qualche
+parte nella rete.  Se la connessione non può essere instaurata, o se
+il server restituisce un codice di errore, viene sollevata l'eccezione
+<tt class="exception">IOError</tt>.  Se tutto va bene, viene restituito un oggetto
+simile a file.  Questo supporterà i seguenti metodi: <tt class="method">read()</tt>,
+<tt class="method">readline()</tt>, <tt class="method">readlines()</tt>, <tt class="method">fileno()</tt>,
+<tt class="method">close()</tt>, <tt class="method">info()</tt> e <tt class="method">geturl()</tt>.  Inoltre
+possiede un proprio supporto per il protocollo di iterazione.
+Un ammonimento: il metodo <tt class="method">read()</tt>, se la dimensione
+dell'argomento viene omessa o è negativa, può non riuscire a leggere
+fino alla fine del flusso di dati; questa non è una soluzione adatta a
+determinare che l'intero flusso di dati proveniente dal socket venga
+letto in casi generali.
+
+<p>
+Ad eccezione di <tt class="method">info()</tt> e <tt class="method">geturl()</tt>, questi
+metodi possiedono la stessa interfaccia di un oggetto file -- vedere
+la sezione <a href="https://docs.python.it/html/lib/bltin-file-objects.html#bltin-file-objects">2.3.9</a> di questo manuale.  (Non è un
+oggetto file built-in, comunque, cosìcché non può essere usato in
+quelle poche situazioni dove è richiesto un vero oggetto file
+built-in.) 
+
+</p><p>
+Il metodo <tt class="method">info()</tt> restituisce un'istanza della classe
+<tt class="class">mimetools.Message</tt> contenente meta informazioni associate
+all'URL.  Quando il metodo è HTTP, queste intestazioni sono quelle
+restituite dal server all'inizio della pagina HTML recuperata (incluso
+Content-Length e Content-Type).  Quando il metodo è FTP restituisce la
+richiesta.  Una intestazione Content-Type sarà presente se il tipo
+MIME può essere analizzato.  Quando il metodo è un file locale, le
+intestazioni restituite includeranno una rappresentazione Date
+dell'ora dell'ultima modifica al file, un Content-Lenght indicante la
+dimensione del file, ed un Content-Type contenente un riferimento al
+tipo di file.  Vedere anche la descrizione del modulo
+<tt class="module"><a href="https://docs.python.it/html/lib/module-mimetools.html">mimetools</a></tt><a id="l2h-3049"><!--x--></a>. 
+
+</p><p>
+Il metodo <tt class="method">geturl()</tt> restituisce l'URL reale della pagina.  In
+alcuni casi, il server HTTP redirige un client verso un altra URL.  La
+funzione <tt class="function">urlopen()</tt> lo gestisce in modo trasparente, ma in
+alcuni casi il chiamante ha la necessità di sapere verso quale URL è
+stato rediretto il client.  Il metodo <tt class="method">geturl()</tt> può anche
+essere usato per posizionarsi su questa URL rediretta.
+
+</p><p>
+Se l'<var>url</var> utilizza lo schema identificativo <span class="file">http:</span>
+l'argomento facoltativo <var>data</var> può essere indicato per specificare
+una richiesta <code>POST</code> (normalmente il tipo di richiesta è
+<code>GET</code>).  L'argomento <var>data</var> deve essere nel formato standard
+<span class="mimetype">application/x-www-form-urlencoded</span>; vedere sotto alla
+funzione <tt class="function">urlencode()</tt>. 
+
+</p><p>
+La funzione <tt class="function">urlopen()</tt> lavora in modo trasparente con i
+proxy che non richiedono autenticazione.  In un ambiente <font style="font-variant: small-caps;">Unix</font> o
+Windows, impostare le variabili d'ambiente <a class="envvar" id="l2h-3050">http_proxy</a>,
+<a class="envvar" id="l2h-3051">ftp_proxy</a> o <a class="envvar" id="l2h-3052">gopher_proxy</a> alla  URL che identifica
+il proxy server prima di avviare l'interprete Python.  Per esempio (il
+"<tt class="character">%</tt>" è il comando del prompt): 
+
+</p><p>
+</p><div class="verbatim"><pre>% http_proxy="http://www.someproxy.com:3128"
+% export http_proxy
+% python
+...
+</pre></div>
+
+<p>
+In un ambiente Windows, se le variabili ambiente di proxy non sono
+impostate, l'impostazione del proxy sono ottenute dalla sezione delle
+impostazioni Internet del registro. 
+
+</p><p>
+In un ambiente Macintosh, <tt class="function">urlopen()</tt> recupererà le
+informazioni sul proxy da Internet<a id="l2h-3053"><!--x--></a> Config. 
+
+</p><p>
+Alternativamente, l'argomento facoltativo <var>proxies</var> può essere
+usato per specificare esplicitamente i proxy.  Deve essere un
+dizionario con lo schema dei nomi delle URL del proxy mappati, un
+dizionario vuoto ottiene il risultato di non permettere l'uso di alcun
+proxy, e <code>None</code> (il valore predefinito) causa l'uso delle
+impostazioni proxy dell'ambiente, come discusso precedentemente.  Per
+esempio: 
+
+</p><p>
+</p><div class="verbatim"><pre># Usa http://www.someproxy.com:3128 come http proxy
+proxies = proxies={'http': 'http://www.someproxy.com:3128'}
+filehandle = urllib.urlopen(some_url, proxies=proxies)
+# Non usa alcun proxy
+filehandle = urllib.urlopen(some_url, proxies={})
+# Usa i proxy dall'ambiente - entrambe le versioni sono equivalenti
+filehandle = urllib.urlopen(some_url, proxies=None)
+filehandle = urllib.urlopen(some_url)
+</pre></div>
+
+<p>
+La funzione <tt class="function">urlopen()</tt> non supporta la specifica esplicita
+del proxy.  Se si ha la necessità di sovrascrivere l'impostazione
+d'ambiente del proxy, si usi <tt class="class">URLopener</tt>, o una sua sotto classe
+come <tt class="class">FancyURLopener</tt>. 
+
+</p><p>
+I proxy che richiedono l'autenticazione per il loro utilizzo, non sono
+attualmente supportati; questa è considerata una implementazione
+limitata. 
+
+</p><p>
+
+<span class="versionnote">Modificato nella versione 2.3:
+Added the <var>proxies</var> support.</span>
+
+</p></dd></dl>
+
+<p>
+</p><dl><dt><table cellpadding="0" cellspacing="0"><tbody><tr valign="baseline">
+  <td><nobr><b><tt id="l2h-3031" class="function">urlretrieve</tt></b>(</nobr></td>
+  <td><var>url</var><big>[</big><var>, filename</var><big>[</big><var>,
+                              reporthook</var><big>[</big><var>, data</var><big>]</big><big>]</big><big>]</big>)</td></tr></tbody></table></dt>
+<dd>
+Copia un oggetto di rete denotato da una URL verso un file locale, se
+necessario.  Se la URL punta ad un file locale, o se esiste una copia
+valida dell'oggetto, l'oggetto non viene copiato.  Restituisce una
+tupla <code>(<var>filename</var>, <var>headers</var>)</code> dove <var>filename</var> è il
+nome del file locale in cui l'oggetto può essere trovato, e
+<var>headers</var> è qualsiasi cosa il metodo <tt class="method">info()</tt> dell'oggetto
+restituito da <tt class="function">urlopen()</tt> restituisca (per un oggetto remoto,
+possibilmente posizionato nella cache).  Le eccezioni sono le stesse
+di <tt class="function">urlopen()</tt>. 
+
+<p>
+Il secondo argomento, se presente, specifica la posizione del file su
+cui copiare (se assente, la locazione sarà un file temporaneo con un
+nome generato).  Il terzo argomento, se presente, è una funzione di
+aggancio che verrà chiamata una volta sulla connessione della rete ed
+una volta che un blocco verrà letto successivamente.  L'aggancio
+passerà tre argomenti: un numero dei blocchi trasferiti fino a quel
+momento, una dimensione in byte del blocco, e la dimensione totale del
+file.  Il terzo argomento deve essere un <code>-1</code> sui vecchi server
+FTP che non restituiscono la dimensione del file su di una richiesta
+di recupero. 
+
+</p><p>
+Se la <var>url</var> usa lo schema identificativo <span class="file">http:</span>, l'argomento
+facoltativo <var>data</var> può essere indicato per specificare una
+richiesta <code>POST</code> (normalmente il tipo di richiesta è <code>GET</code>).
+L'argomento <var>data</var> deve essere nel formato standard
+<span class="mimetype">application/x-www-form-urlencoded</span>; vedere sotto la funzione
+<tt class="function">urlencode()</tt>. 
+</p></dd></dl>
+
+<p>
+</p><dl><dt><b><tt id="l2h-3032">_urlopener</tt></b></dt>
+<dd>
+Le funzioni pubbliche <tt class="function">urlopen()</tt> e <tt class="function">urlretrieve()</tt>
+creano una istanza della classe <tt class="class">FancyURLopener</tt> e la usano per
+migliorare le loro azioni di richiesta.  Per sovrascrivere queste
+funzionalità, i programmatori possono creare una sotto classe di
+<tt class="class">URLopener</tt> o <tt class="class">FancyURLopener</tt>, che assegna una istanza
+della classe alla variabile <code>urllib._urlopener</code> prima di chiamare
+la funzione desiderata.  Per esempio, le applicazioni possono voler
+specificare un differente header <span class="mailheader">User-Agent:</span> rispetto a
+quello definito da <tt class="class">URLopener</tt>.  Questo può essere realizzato
+con il seguente codice: 
+
+<p>
+</p><div class="verbatim"><pre>import urllib
+
+class AppURLopener(urllib.FancyURLopener):
+    def __init__(self, *args):
+        self.version = "App/1.7"
+        urllib.FancyURLopener.__init__(self, *args)
+
+urllib._urlopener = AppURLopener()
+</pre></div>
+</dd></dl>
+
+<p>
+</p><dl><dt><table cellpadding="0" cellspacing="0"><tbody><tr valign="baseline">
+  <td><nobr><b><tt id="l2h-3033" class="function">urlcleanup</tt></b>(</nobr></td>
+  <td>)</td></tr></tbody></table></dt>
+<dd>
+Pulisce la cache che potrebbe essere stata costruita da una precedente
+chiamata a <tt class="function">urlretrieve()</tt>. 
+</dd></dl>
+
+<p>
+</p><dl><dt><table cellpadding="0" cellspacing="0"><tbody><tr valign="baseline">
+  <td><nobr><b><tt id="l2h-3034" class="function">quote</tt></b>(</nobr></td>
+  <td><var>string</var><big>[</big><var>, safe</var><big>]</big>)</td></tr></tbody></table></dt>
+<dd>
+Sostituisce i carattere speciali all'interno della stringa
+<var>string</var>, usando il carattere di protezione "<tt class="samp">%xx</tt>".  Lettere,
+numeri ed i caratteri "<tt class="character">_.-</tt>" non vengono mai quotati.  Il
+parametro facoltativo <var>safe</var> specifica caratteri aggiuntivi che
+non dovrebbero essere quotati -- il suo valore predefinito è
+<code>'/'</code>. 
+
+<p>
+Esempio: <code>quote('/~connolly/')</code> yields <code>'/%7econnolly/'</code>.
+</p></dd></dl>
+
+<p>
+</p><dl><dt><table cellpadding="0" cellspacing="0"><tbody><tr valign="baseline">
+  <td><nobr><b><tt id="l2h-3035" class="function">quote_plus</tt></b>(</nobr></td>
+  <td><var>string</var><big>[</big><var>, safe</var><big>]</big>)</td></tr></tbody></table></dt>
+<dd>
+Come <tt class="function">quote()</tt>, ma sostituisce anche gli spazi con un segno
+"<tt class="samp">+</tt>", come richiesto per la quotatura dei valori di form HTML.  I
+segni "<tt class="samp">+</tt>" nella stringa originale vengono protetti finché non
+vengono inclusi in <var>safe</var>.  Inoltre non possiede un predefinito
+<var>safe</var> per <code>'/'</code>.
+</dd></dl>
+
+<p>
+</p><dl><dt><table cellpadding="0" cellspacing="0"><tbody><tr valign="baseline">
+  <td><nobr><b><tt id="l2h-3036" class="function">unquote</tt></b>(</nobr></td>
+  <td><var>string</var>)</td></tr></tbody></table></dt>
+<dd>
+Sostituisce il carattere di protezione "<tt class="samp">%xx</tt>" con i loro
+equivalenti in singolo carattere. 
+
+<p>
+Esempio: <code>unquote('/%7Econnolly/')</code> yields <code>'/~connolly/'</code>.
+</p></dd></dl>
+
+<p>
+</p><dl><dt><table cellpadding="0" cellspacing="0"><tbody><tr valign="baseline">
+  <td><nobr><b><tt id="l2h-3037" class="function">unquote_plus</tt></b>(</nobr></td>
+  <td><var>string</var>)</td></tr></tbody></table></dt>
+<dd>
+Come <tt class="function">unquote()</tt>, ma sostituisce anche i segni "<tt class="samp">+</tt>" con
+spazi, come richiesto quando si toglie la quotatura ai valori delle
+form HTML. 
+</dd></dl>
+
+<p>
+</p><dl><dt><table cellpadding="0" cellspacing="0"><tbody><tr valign="baseline">
+  <td><nobr><b><tt id="l2h-3038" class="function">urlencode</tt></b>(</nobr></td>
+  <td><var>query</var><big>[</big><var>, doseq</var><big>]</big>)</td></tr></tbody></table></dt>
+<dd>
+Converte un oggetto mappato o una sequenza di tuple di due elementi in
+una stringa ``url codificata'', passibile di essere passata a
+<tt class="function">urlopen()</tt> come argomento facoltativo <var>data</var>.  Questo è
+utile per passare un dizionario di campi di form ad una richiesta
+<code>POST</code>.  La stringa risultante è una serie di coppie
+<code><var>chiave</var>=<var>valore</var></code> separate dal carattere
+"<tt class="character">&amp;</tt>", dove ogni <var>chiave</var> ed ogni <var>valore</var> vengono
+quotati usando la funzione <tt class="function">quote_plus()</tt> indicata sopra.  Se
+il parametro facoltativo <var>doseq</var> è presente e valutato come vero,
+le coppie individuali <code><var>chiave</var>=<var>valore</var></code> vengono
+generate per ogni elemento della sequenza.  Quando una sequenza di
+tuple di due elementi viene usata come argomento di <var>query</var>, il
+primo elemento di ogni tupla è una chiave e il secondo è un valore.
+L'ordine dei parametri nella stringa codificata deve corrispondere
+all'ordine delle tuple dei parametri nella sequenza.  Il modulo
+<tt class="module"><a href="https://docs.python.it/html/lib/module-cgi.html">cgi</a></tt> fornisce le funzioni <tt class="function">parse_qs()</tt> e
+<tt class="function">parse_qsl()</tt> che vengono usate per analizzare le stringhe di
+interrogazione nelle strutture dati di Python. 
+</dd></dl>
+
+<p>
+</p><dl><dt><table cellpadding="0" cellspacing="0"><tbody><tr valign="baseline">
+  <td><nobr><b><tt id="l2h-3039" class="function">pathname2url</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></tbody></table></dt>
+<dd>
+Converte dalla sintassi locale, un percorso di nomi <var>path</var> in un
+percorso nella forma usata nei percorsi di una URL.  Questo non
+produce una URL completa.  Il valore restituito sarà già quotato
+usando la funzione <tt class="function">quote()</tt>. 
+</dd></dl>
+
+<p>
+</p><dl><dt><table cellpadding="0" cellspacing="0"><tbody><tr valign="baseline">
+  <td><nobr><b><tt id="l2h-3040" class="function">url2pathname</tt></b>(</nobr></td>
+  <td><var>path</var>)</td></tr></tbody></table></dt>
+<dd>
+converte il componente <var>path</var> dalla URL codificata, in una
+sintassi di un percorso locale.  Questo non accetta una URL completa.
+Questa funzione usa <tt class="function">unquote()</tt> per decodificare  <var>path</var>.
+</dd></dl>
+
+<p>
+</p><dl><dt><table cellpadding="0" cellspacing="0"><tbody><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id="l2h-3041" class="class">URLopener</tt></b>(</nobr></td>
+  <td><big>[</big><var>proxies</var><big>[</big><var>, **x509</var><big>]</big><big>]</big>)</td></tr></tbody></table></dt>
+<dd>
+Classe di base per l'apertura e la lettura delle URL.  Finché si avrà
+bisogno di supportare l'apertura di oggetti usando schemi diversi da
+<span class="file">http:</span>, <span class="file">ftp:</span>, <span class="file">gopher:</span> o <span class="file">file:</span>,
+probabilmente si vorrà usare <tt class="class">FancyURLopener</tt>. 
+
+<p>
+Predefinitamente, la classe <tt class="class">URLopener</tt> invia
+un'intestazione<span class="mailheader">User-Agent:</span> di "<tt class="samp">urllib/<var>VVV</var></tt>",
+dove <var>VVV</var> è la versione della <tt class="module">urllib</tt>.  Le applicazioni
+possono definire la propria intestazione <span class="mailheader">User-Agent:</span>
+attraverso sotto classi di <tt class="class">URLopener</tt> o <tt class="class">FancyURLopener</tt>
+ed impostando l'attributo <tt class="member">version</tt> dell'istanza ad un
+appropriato valore stringa prima che il metodo <tt class="method">open()</tt> venga
+chiamato. 
+
+</p><p>
+Il parametro facoltativo <var>proxies</var> dovrebbe essere un dizionario
+che mappa gli schemi dei nomi in proxy URL, dove un dizionario vuoto
+imposta il proxy completamente ad off.  Il suo valore predefinito è
+<code>None</code>, nel cui caso le impostazioni d'ambiente del proxy
+verranno usate se presenti, come discusso precedentemente nella
+definizione di <tt class="function">urlopen()</tt>. 
+
+</p><p>
+Parametri di chiavi addizionali, raccolte in <var>x509</var>, vengono usate
+per l'autenticazione con lo schema <span class="file">https:</span>.  Le chiavi
+<var>key_file</var> e <var>cert_file</var> vengono supportate; entrambe sono
+attualmente necessarie per recuperare una risorsa da una URL
+<span class="file">https:</span>: 
+</p></dd></dl>
+
+<p>
+</p><dl><dt><table cellpadding="0" cellspacing="0"><tbody><tr valign="baseline">
+  <td><nobr><b><span class="typelabel">class</span>&nbsp;<tt id="l2h-3042" class="class">FancyURLopener</tt></b>(</nobr></td>
+  <td><var>...</var>)</td></tr></tbody></table></dt>
+<dd>
+<tt class="class">FancyURLopener</tt> (sotto classe di <tt class="class">URLopener</tt>) fornisce il
+gestore predefinito per i seguenti codici di risposta HTTP: 301, 302, 
+303, 307 e 401.  Per i codici di risposta 30x indicati sopra,
+l'intestazione <span class="mailheader">Location:</span> viene usata per scaricare l'URL
+attuale.  Per i codici di risposta 401 (autenticazione richiesta),
+viene fornita l'autenticazione base dell'HTTP.  Per i codici di
+risposta 30x, la ricorsione viene controllata dal valore
+dell'attributo <var>maxtries</var>, che ha un valore predefinito impostato a
+10.
+
+<p>
+<span class="note"><b class="label">Note:</b>
+In accordo alle indicazioni dell'<a class="rfc" id="rfcref-83124" href="http://www.faqs.org/rfcs/rfc2616.html">RFC 2616</a>, le risposte 301 e
+  302 a richieste POST non devono essere automaticamente redirette
+  senza la conferma dell'utente.  In realtà, i browser eseguono la
+  redirezione automatica di fronte a queste risposte, cambiando il
+  POST in GET, e <tt class="module">urllib</tt> riproduce questa caratteristica.</span>
+
+</p><p>
+Il parametro passato al costruttore è lo stesso di quello per
+<tt class="class">URLopener</tt>. 
+
+</p><p>
+<span class="note"><b class="label">Note:</b>
+Quando si esegue l'autenticazione di base, un'istanza
+  <tt class="class">FancyURLopener</tt> chiama il suo metodo
+  <tt class="method">prompt_user_passwd()</tt>.  L'implementazione predefinita
+  domanda all'utente le informazioni richieste sul terminale in uso.
+  Se necessario, una sotto classe può sovrascrivere questo metodo per
+  supportare caratteristiche più appropriate.</span> 
+</p></dd></dl>
+
+<p>
+Restrizioni:
+
+</p><p>
+
+</p><ul>
+<li>Correntemente, solo i seguenti protocolli vengono supportati: HTTP,
+(Versione 0.9 e 1.0), Gopher (man non Gopher-+), FTP e file locali. 
+<a id="l2h-3043"><!--x--></a><a id="l2h-3044"><!--x--></a><a id="l2h-3045"><!--x--></a>
+<p>
+</p></li>
+<li>La funzionalità di caching di <tt class="function">urlretrieve()</tt> è stata
+disabilitata fino a quando non si troverà il corretto processo per le
+intestazioni di ``Expiration time''. 
+
+<p>
+</p></li>
+<li>Ci dovrebbe essere una funzione per verificare quale particolare URL è
+nella cache. 
+
+<p>
+</p></li>
+<li>Per compatibilità con il passato, se una URL mostra di puntare a un
+file locale, ma il file non può essere aperto, la URL viene
+reinterpretata usando il protocollo FTP.  Questo può causare in alcune
+occasione messaggi di errori confusi. 
+
+<p>
+</p></li>
+<li>Le funzioni <tt class="function">urlopen()</tt> e <tt class="function">urlretrieve()</tt> possono
+causare lunghi ritardi quando attendono che una connessione di rete
+venga attivata.  Questo significa che è difficile costruire un client
+Web interattivo usando questa funzione senza l'uso dei threads. 
+
+<p>
+</p></li>
+<li>Il dato restituito da <tt class="function">urlopen()</tt> o <tt class="function">urlretrieve()</tt>
+è il dato grezzo restituito dal server.  Questo può essere un dato
+binario (per esempio un'immagine), puro testo o (per esempio)
+HTML<a id="l2h-3054"><!--x--></a>.  Il protocollo HTTP<a id="l2h-3046"><!--x--></a> fornisce
+il tipo di informazione nell'intestazione della risposta, che può
+essere controllato cercando l'intestazione <span class="mailheader">Content-Type:</span>.
+Per il protocollo <a id="l2h-3047"><!--x--></a>, il tipo di informazione è
+codificata nell'URL; non c'è attualmente nessun modo facile per
+estrarlo.  Se il dato restituito è HTML, si può usare il modulo
+<tt class="module"><a href="https://docs.python.it/html/lib/module-htmllib.html">htmllib</a></tt><a id="l2h-3055"><!--x--></a> per analizzarlo.
+
+<p>
+</p></li>
+<li>Questo modulo non supporta l'uso di proxy che richiedono
+autenticazione.  Questo deve essere implementato in futuro.
+
+<p>
+</p></li>
+<li>Il modulo <tt class="module">urllib</tt> contiene (non documentate) funzioni per
+l'analisi e la deanalisi delle stringhe URL, l'interfaccia
+raccomandata per la manipolazione è nel modulo
+<tt class="module"><a href="https://docs.python.it/html/lib/module-urlparse.html">urlparse</a></tt><a id="l2h-3056"><!--x--></a>. 
+
+<p>
+</p></li>
+</ul>
+
+<p>
+
+</p><p><br></p><hr class="online-navigation">
+<div class="online-navigation">
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>Subsections</strong></a>
+
+<ul class="ChildLinks">
+<li><a href="https://docs.python.it/html/lib/urlopener-objs.html">11.4.1 Oggetti URLopener</a>
+</li><li><a href="https://docs.python.it/html/lib/node426.html">11.4.2 Esempi</a>
+</li></ul>
+<!--End of Table of Child-Links-->
+</div>
+
+<div class="navigation">
+<div class="online-navigation"><hr>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tbody><tr>
+<td class="online-navigation"><a rel="prev" title="11.3 cgitb  " href="https://docs.python.it/html/lib/module-cgitb.html"><img src="./tramite_URL_files/previous.png" border="0" height="32" alt="Previous Page" width="32"></a></td>
+<td class="online-navigation"><a rel="parent" title="11. Protocolli internet e" href="https://docs.python.it/html/lib/internet.html"><img src="./tramite_URL_files/up.png" border="0" height="32" alt="Up One Level" width="32"></a></td>
+<td class="online-navigation"><a rel="next" title="11.4.1 Oggetti URLopener" href="https://docs.python.it/html/lib/urlopener-objs.html"><img src="./tramite_URL_files/next.png" border="0" height="32" alt="Next Page" width="32"></a></td>
+<td align="center" width="100%">La libreria di riferimento di Python</td>
+<td class="online-navigation"><a rel="contents" title="Table of Contents" href="https://docs.python.it/html/lib/contents.html"><img src="./tramite_URL_files/contents.png" border="0" height="32" alt="Contents" width="32"></a></td>
+<td class="online-navigation"><a href="https://docs.python.it/html/lib/modindex.html" title="Module Index"><img src="./tramite_URL_files/modules.png" border="0" height="32" alt="Module Index" width="32"></a></td>
+<td class="online-navigation"><a rel="index" title="Index" href="https://docs.python.it/html/lib/genindex.html"><img src="./tramite_URL_files/index.png" border="0" height="32" alt="Index" width="32"></a></td>
+</tr></tbody></table>
+<div class="online-navigation">
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="https://docs.python.it/html/lib/module-cgitb.html">11.3 cgitb  </a>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="https://docs.python.it/html/lib/internet.html">11. Protocolli internet e</a>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="https://docs.python.it/html/lib/urlopener-objs.html">11.4.1 Oggetti URLopener</a>
+</div>
+</div>
+<hr>
+<span class="release-info">Release 2.3.4, documentation updated on 21. maggio 2005.</span>
+</div>
+<!--End of Navigation Panel-->
+<address>
+Vedete <i><a href="https://docs.python.it/html/lib/about.html">Circa questo documento...</a></i> per informazioni su modifiche e suggerimenti.
+</address>
+
+
+</body></html>
